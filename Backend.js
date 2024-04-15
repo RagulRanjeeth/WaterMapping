@@ -29,7 +29,7 @@ app.get('/sensor', (req, res) => {
 });
 
 // Endpoint to handle incoming sensor data
-app.post('/sensor-data', (req, res) => {
+app.post('/sensor', (req, res) => {
   const sensorData = req.body;
   console.log('Received sensor data:', sensorData);
 
