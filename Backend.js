@@ -76,7 +76,7 @@
 const express = require("express");
 const app = express(); // Create an instance of Express
 
-const PORT = 8030;
+const PORT = 8080;
 
 app.get('/sensor', (req, res) => {
   res.status(200).send({
