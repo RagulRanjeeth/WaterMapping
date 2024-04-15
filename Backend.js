@@ -31,7 +31,7 @@ app.get('/sensor', (req, res) => {
 // Endpoint to handle incoming sensor data
 app.post('/sensor', (req, res) => {
   const sensorData = req.body;
-  console.log('Received sensor data:', sensorData);
+  res.send('Received sensor data:', sensorData);
 
   // Save the sensor data to MongoDB
   const newData = new SensorData({ value: sensorData.value });
@@ -46,9 +46,12 @@ app.post('/sensor', (req, res) => {
     });
 });
 
+
 // Server starting
 const PORT = 8080;
 app.listen(PORT, () => {
+   console.log(`Server is running on port ${PORT}`);
+});
 
 
 
