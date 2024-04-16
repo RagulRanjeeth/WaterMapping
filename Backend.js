@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB using promise-based syntax
-mongoose.connect("mongodb+srv://ragulranjeeth2105116:Ragul655@watermappingcluster1.n9pozag.mongodb.net/?retryWrites=true&w=majority&appName=WaterMappingCluster1")
+mongoose.connect("mongodb+srv://ragulranjeeth2105116:Ragul655@watermappingcluster1.n9pozag.mongodb.net/SensorData?retryWrites=true&w=majority&appName=WaterMappingCluster1")
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -18,18 +18,27 @@ mongoose.connect("mongodb+srv://ragulranjeeth2105116:Ragul655@watermappingcluste
 
 // Define schema and model for sensor data
 const sensorDataSchema = new mongoose.Schema({
-  value: Number,
-  timestamp: { type: Date, default: Date.now }
+  value: {
+    type: Number,
+    required: true
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now
+  }
+  //timestamp: { type: Date, default: Date.now }
 });
 
-const SensorData = mongoose.model('SensorData', sensorDataSchema);
+const SensorData = mongoose.model('SensordataWaterqualitymanagement', sensorDataSchema);
 
+
+//SensorData.insertMany([sensorDataSchema1])
 app.get('/sensor', (req, res) => {
   res.send('Welcome to my HTTP page!');
 });
 
 // Endpoint to handle incoming sensor data
-app.post('/sensor', (req, res) => {
+app.post('/sensor_data', (req, res) => {
   const sensorData = req.body;
   res.send('Received sensor data:', sensorData);
 
@@ -46,14 +55,27 @@ app.post('/sensor', (req, res) => {
     });
 });
 
-
 // Server starting
 const PORT = 8080;
 app.listen(PORT, () => {
-   console.log(`Server is running on port ${PORT}`);
-});
 
 
 
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+// const express = require("express");
+// const app = express(); // Create an instance of Express
+
+// const PORT = 8080;
+
+// app.get('/sensor', (req, res) => {
+//   res.status(200).send({
+//     sensor: "water"
+//   });
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
